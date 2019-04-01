@@ -272,6 +272,8 @@ require_relative "./schema/payloads/checkout_customer_associate"
 require_relative "./schema/payloads/checkout_complete_with_tokenized_payment"
 
 require_relative "./mutations/base_mutation"
+require_relative "./mutations/customer_access_token_create"
+
 require_relative "./schema/types/query_root"
 require_relative "./schema/types/mutation"
 require_relative "./schema/schema"

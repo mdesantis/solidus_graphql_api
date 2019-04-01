@@ -10256,64 +10256,6 @@ module Spree::GraphQL
       #end
     end
 
-    # customerAccessTokenCreate: Creates a customer access token. The customer access token is required to modify the customer object in any way.
-    # @param input [Inputs::CustomerAccessTokenCreate!]
-    # @return [Payloads::CustomerAccessTokenCreate]
-    describe 'customerAccessTokenCreate' do
-      let!(:query) {
-        %q{
-          mutation {
-            customerAccessTokenCreate(
-              input: {
-                email: "String",
-                password: "String"
-              }
-            ) {
-              customerAccessToken {
-                accessToken
-                expiresAt
-              }
-              customerUserErrors {
-                code
-                field
-                message
-              }
-              userErrors {
-                field
-                message
-              }
-            }
-          }
-        }
-      }
-      let!(:result) {
-        {
-          data: {
-            customerAccessTokenCreate: {
-              customerAccessToken: {
-                accessToken: 'String',
-                expiresAt: 'DateTime',
-              },
-              customerUserErrors: {
-                code: 'BLANK | INVALID | TAKEN | TOO_LONG | TOO_SHORT | UNIDENTIFIED_CUSTOMER | CUSTOMER_DISABLED | PASSWORD_STARTS_OR_ENDS_WITH_WHITESPACE | CONTAINS_HTML_TAGS | CONTAINS_URL',
-                field: 'String',
-                message: 'String',
-              },
-              userErrors: {
-                field: 'String',
-                message: 'String',
-              },
-            },
-          },
-          #errors: {},
-        }
-      }
-      #it 'succeeds' do
-      #  execute
-      #  expect(response_hash).to eq(result_hash)
-      #end
-    end
-
     # customerAccessTokenDelete: Permanently destroys a customer access token.
     # @param customer_access_token [Types::String!]
     # @return [Payloads::CustomerAccessTokenDelete]

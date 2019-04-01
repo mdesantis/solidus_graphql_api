@@ -83,12 +83,7 @@ class Spree::GraphQL::Schema::Types::Mutation < Spree::GraphQL::Schema::Types::B
     argument :checkout_id, ::GraphQL::Types::ID, required: true, description: %q{The ID of the checkout.}
     argument :shipping_rate_handle, ::GraphQL::Types::String, required: true, description: %q{A concatenation of a Checkout’s shipping provider, price, and title, enabling the customer to select the availableShippingRates.}
   end
-  field :customer_access_token_create, ::Spree::GraphQL::Schema::Payloads::CustomerAccessTokenCreate, null: true do
-    description %q{Creates a customer access token.
-The customer access token is required to modify the customer object in any way.
-}
-    argument :input, ::Spree::GraphQL::Schema::Inputs::CustomerAccessTokenCreate, required: true, description: nil
-  end
+  field :customer_access_token_create, mutation: ::Spree::GraphQL::Mutations::CustomerAccessTokenCreate
   field :customer_access_token_delete, ::Spree::GraphQL::Schema::Payloads::CustomerAccessTokenDelete, null: true do
     description %q{Permanently destroys a customer access token.}
     argument :customer_access_token, ::GraphQL::Types::String, required: true, description: %q{The access token used to identify the customer.}

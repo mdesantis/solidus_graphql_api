@@ -133,13 +133,6 @@ module Spree::GraphQL::Types::Mutation
     raise ::Spree::GraphQL::NotImplementedError.new
   end
 
-  # customerAccessTokenCreate: Creates a customer access token. The customer access token is required to modify the customer object in any way.
-  # @param input [Inputs::CustomerAccessTokenCreate!]
-  # @return [Payloads::CustomerAccessTokenCreate]
-  def customer_access_token_create(input:)
-    raise ::Spree::GraphQL::NotImplementedError.new
-  end
-
   # customerAccessTokenDelete: Permanently destroys a customer access token.
   # @param customer_access_token [Types::String!] The access token used to identify the customer.
   # @return [Payloads::CustomerAccessTokenDelete]

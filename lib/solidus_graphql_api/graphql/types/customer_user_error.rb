@@ -5,18 +5,18 @@ module Spree::GraphQL::Types::CustomerUserError
   # code: Error code to uniquely identify the error.
   # @return [Types::CustomerErrorCode]
   def code()
-    raise ::Spree::GraphQL::NotImplementedError.new
+    object[:code]
   end
 
   # field: Path to the input field which caused the error.
   # @return [[Types::String!]]
   def field()
-    raise ::Spree::GraphQL::NotImplementedError.new
+    object[:field]
   end
 
   # message: The error message.
   # @return [Types::String!]
   def message()
-    raise ::Spree::GraphQL::NotImplementedError.new
+    object[:message]
   end
 end
