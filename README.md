@@ -333,7 +333,7 @@ Current percentage of implementation: 23.5%
 - [ ] Mutation.checkoutLineItemsUpdate(checkoutId, lineItems)
 - [ ] Mutation.checkoutShippingAddressUpdate(shippingAddress, checkoutId)
 - [ ] Mutation.checkoutShippingLineUpdate(checkoutId, shippingRateHandle)
-- [ ] Mutation.customerAccessTokenCreate(input)
+- [x] Mutation.customerAccessTokenCreate(input)
 - [ ] Mutation.customerAccessTokenDelete(customerAccessToken)
 - [ ] Mutation.customerAccessTokenRenew(customerAccessToken)
 - [ ] Mutation.customerActivate(id, input)

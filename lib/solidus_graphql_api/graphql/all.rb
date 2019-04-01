@@ -277,6 +277,7 @@ require_relative "./mutations/checkout_create"
 require_relative "./mutations/checkout_line_items_add"
 require_relative "./mutations/checkout_line_items_update"
 require_relative "./mutations/checkout_line_items_remove"
+require_relative "./mutations/customer_access_token_create"
 require_relative "./mutations/customer_create"
 
 require_relative "./schema/types/query_root"

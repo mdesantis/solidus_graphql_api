@@ -7,4 +7,7 @@ class Spree::GraphQL::Schema::Payloads::CustomerAccessTokenCreate < Spree::Graph
   field :customer_user_errors, [::Spree::GraphQL::Schema::Types::CustomerUserError], null: false do
     description %q{List of errors that occurred executing the mutation.}
   end
+  field :user_errors, [::Spree::GraphQL::Schema::Types::CustomerUserError], null: false, deprecation_reason: %q{Use `customerUserErrors` instead} do
+    description %q{List of errors that occurred executing the mutation.}
+  end
 end
