@@ -21,6 +21,7 @@ module Spree
          #Query context goes here, for example:
          current_user: current_graphql_user,
          current_store: current_store,
+         helpers: helpers,
          backtrace: backtrace_enabled
       }
       result = Spree::GraphQL::Schema::Schema.execute(query, variables: variables, context: context, operation_name: operation_name)

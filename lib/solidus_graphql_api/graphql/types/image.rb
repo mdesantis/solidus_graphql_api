@@ -14,7 +14,7 @@ module Spree::GraphQL::Types::Image
   end
 
   def src
-    URI.join ActionController::Base.asset_host, object.url(:large)
+    context[:helpers].asset_url object.url :large
   end
 
   # transformedSrc: The location of the transformed image as a URL. All transformation arguments are considered "best-effort". If they can be applied to an image, they will be. Otherwise any transformations which an image type does not support will be ignored.

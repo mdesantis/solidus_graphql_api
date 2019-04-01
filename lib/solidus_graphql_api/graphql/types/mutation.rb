@@ -32,13 +32,6 @@ module Spree::GraphQL::Types::Mutation
     raise ::Spree::GraphQL::NotImplementedError.new
   end
 
-  # checkoutCreate: Creates a new checkout.
-  # @param input [Inputs::CheckoutCreate!]
-  # @return [Payloads::CheckoutCreate]
-  def checkout_create(input:)
-    raise ::Spree::GraphQL::NotImplementedError.new
-  end
-
   # checkoutCustomerAssociateV2: Associates a customer to the checkout.
   # @param checkout_id [Types::ID!] The ID of the checkout.
   # @param customer_access_token [Types::String!] The customer access token of the customer to associate.

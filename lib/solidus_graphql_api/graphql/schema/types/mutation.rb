@@ -21,10 +21,7 @@ class Spree::GraphQL::Schema::Types::Mutation < Spree::GraphQL::Schema::Types::B
     argument :checkout_id, ::GraphQL::Types::ID, required: true, description: %q{The ID of the checkout.}
     argument :payment, ::Spree::GraphQL::Schema::Inputs::TokenizedPaymentV2, required: true, description: %q{The info to apply as a tokenized payment.}
   end
-  field :checkout_create, ::Spree::GraphQL::Schema::Payloads::CheckoutCreate, null: true do
-    description %q{Creates a new checkout.}
-    argument :input, ::Spree::GraphQL::Schema::Inputs::CheckoutCreate, required: true, description: nil
-  end
+  field :checkout_create, mutation: ::Spree::GraphQL::Mutations::CheckoutCreate
   field :checkout_customer_associate_v2, ::Spree::GraphQL::Schema::Payloads::CheckoutCustomerAssociateV2, null: true do
     description %q{Associates a customer to the checkout.}
     argument :checkout_id, ::GraphQL::Types::ID, required: true, description: %q{The ID of the checkout.}

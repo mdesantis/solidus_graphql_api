@@ -54,7 +54,7 @@ module Spree::GraphQL::Types::Checkout
   # @param reverse [Types::Boolean] (false) Reverse the order of the underlying list.
   # @return [Types::CheckoutLineItem.connection_type!]
   def line_items(reverse:)
-    raise ::Spree::GraphQL::NotImplementedError.new
+    reverse ? object.line_items.reverse : object.line_items
   end
 
   # note
@@ -114,7 +114,8 @@ module Spree::GraphQL::Types::Checkout
   # subtotalPrice: Price of the checkout before shipping and taxes.
   # @return [Types::Money!]
   def subtotal_price()
-    raise ::Spree::GraphQL::NotImplementedError.new
+    object.total - object.tax_total
+    # raise ::Spree::GraphQL::NotImplementedError.new
   end
 
   # taxExempt: Specifies if the Checkout is tax exempt.
@@ -132,13 +133,13 @@ module Spree::GraphQL::Types::Checkout
   # totalPrice: The sum of all the prices of all the items in the checkout, taxes and discounts included.
   # @return [Types::Money!]
   def total_price()
-    raise ::Spree::GraphQL::NotImplementedError.new
+    object.total
   end
 
   # totalTax: The sum of all the taxes applied to the line items and shipping lines in the checkout.
   # @return [Types::Money!]
   def total_tax()
-    raise ::Spree::GraphQL::NotImplementedError.new
+    object.tax_total
   end
 
   # updatedAt: The date and time when the checkout was last updated.
@@ -150,6 +151,6 @@ module Spree::GraphQL::Types::Checkout
   # webUrl: The url pointing to the checkout accessible from the web.
   # @return [Types::URL!]
   def web_url()
-    raise ::Spree::GraphQL::NotImplementedError.new
+    context[:helpers].order_url object
   end
 end
