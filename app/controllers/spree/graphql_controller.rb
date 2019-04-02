@@ -21,6 +21,7 @@ module Spree
          #Query context goes here, for example:
          current_user: current_graphql_user,
          current_store: current_store,
+         backtrace: backtrace_enabled
       }
       result = Spree::GraphQL::Schema::Schema.execute(query, variables: variables, context: context, operation_name: operation_name)
       render json: result
@@ -54,6 +55,10 @@ module Spree
       logger.error e.backtrace.join("\n")
 
       render json: { error: { message: e.message, backtrace: e.backtrace }, data: {} }, status: 500
+    end
+
+    def backtrace_enabled
+      !Rails.env.production?
     end
 
     def authenticate_user
