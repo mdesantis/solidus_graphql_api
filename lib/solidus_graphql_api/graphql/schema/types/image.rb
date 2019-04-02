@@ -9,6 +9,53 @@ class Spree::GraphQL::Schema::Types::Image < Spree::GraphQL::Schema::Types::Base
     description %q{A unique identifier for the image.}
   end
   field :original_src, ::Spree::GraphQL::Schema::Types::URL, null: false do
+    description %q{The location of the original image as a URL.
+
+If there are any existing transformations in the original source URL, they will remain and not be stripped.
+}
+  end
+  field :src, ::Spree::GraphQL::Schema::Types::URL, null: false, deprecation_reason: %q{Previously an image had a single `src` field. This could either return the original image
+location or a URL that contained transformations such as sizing or scale.
+
+These transformations were specified by arguments on the parent field.
+
+Now an image has two distinct URL fields: `originalSrc` and `transformedSrc`.
+
+* `originalSrc` - the original unmodified image URL
+* `transformedSrc` - the image URL with the specified transformations included
+
+To migrate to the new fields, image transformations should be moved from the parent field to `transformedSrc`.
+
+Before:
+```graphql
+{
+  shop {
+    productImages(maxWidth: 200, scale: 2) {
+      edges {
+        node {
+          src
+        }
+      }
+    }
+  }
+}
+```
+
+After:
+```graphql
+{
+  shop {
+    productImages {
+      edges {
+        node {
+          transformedSrc(maxWidth: 200, scale: 2)
+        }
+      }
+    }
+  }
+}
+```
+} do
     description %q{The location of the original (untransformed) image as a URL.}
   end
   field :transformed_src, ::Spree::GraphQL::Schema::Types::URL, null: false do

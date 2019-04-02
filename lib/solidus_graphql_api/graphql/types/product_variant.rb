@@ -20,13 +20,13 @@ module Spree::GraphQL::Types::ProductVariant
   # @param scale [Types::Int] (1) Image size multiplier for high-resolution retina displays. Must be between 1 and 3. This argument is deprecated: Use `scale` on `Image.transformedSrc` instead.
   # @return [Types::Image]
   def image(max_width:, max_height:, crop:, scale:)
-    raise ::Spree::GraphQL::NotImplementedError.new
+    object.images.first || object.product.images.first
   end
 
   # price: The product variant’s price.
   # @return [Types::Money!]
   def price()
-    raise ::Spree::GraphQL::NotImplementedError.new
+    object.price.to_s
   end
 
   # product: The product object that the product variant belongs to.
@@ -38,7 +38,7 @@ module Spree::GraphQL::Types::ProductVariant
   # selectedOptions: List of product options applied to the variant.
   # @return [[Types::SelectedOption!]!]
   def selected_options()
-    raise ::Spree::GraphQL::NotImplementedError.new
+    object.option_values
   end
 
   # sku: The SKU (stock keeping unit) associated with the variant.

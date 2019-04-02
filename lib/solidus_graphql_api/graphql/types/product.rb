@@ -48,7 +48,15 @@ module Spree::GraphQL::Types::Product
   # @param scale [Types::Int] (1) Image size multiplier for high-resolution retina displays. Must be between 1 and 3. This argument is deprecated: Use `scale` on `Image.transformedSrc` instead.
   # @return [Types::Image.connection_type!]
   def images(reverse:, sort_key:, max_width:, max_height:, crop:, scale:)
-    raise ::Spree::GraphQL::NotImplementedError.new
+    ::Spree::GraphQL::Types::ProductImageSortKeys.apply!(
+      object.images,
+      reverse: reverse,
+      sort_key: sort_key,
+      max_width: max_width,
+      max_height: max_height,
+      crop: crop,
+      scale: scale
+    )
   end
 
   # onlineStoreUrl: The online store URL for the product. A value of `null` indicates that the product is not published to the Online Store sales channel.
@@ -61,7 +69,7 @@ module Spree::GraphQL::Types::Product
   # @param first [Types::Int] (nil) Truncate the array result to this size.
   # @return [[Types::ProductOption!]!]
   def options(first:)
-    raise ::Spree::GraphQL::NotImplementedError.new
+    first ? object.option_types.first(first) : object.option_types
   end
 
   # priceRange: The price range.
@@ -113,7 +121,7 @@ module Spree::GraphQL::Types::Product
   # @return [Types::ProductVariant.connection_type!]
   def variants(reverse:, sort_key:)
     ::Spree::GraphQL::Types::ProductVariantSortKeys.apply!(
-      object.variants,
+      object.variants_including_master,
       reverse: reverse,
       sort_key: sort_key,
     )

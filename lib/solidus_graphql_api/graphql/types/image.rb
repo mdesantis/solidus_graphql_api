@@ -7,16 +7,14 @@ module Spree::GraphQL::Types::Image
     raise ::Spree::GraphQL::NotImplementedError.new
   end
 
-  # id: A unique identifier for the image.
-  # @return [Types::ID]
-  def id()
-    raise ::Spree::GraphQL::NotImplementedError.new
-  end
-
   # originalSrc: The location of the original (untransformed) image as a URL.
   # @return [Types::URL!]
   def original_src()
     raise ::Spree::GraphQL::NotImplementedError.new
+  end
+
+  def src
+    URI.join ActionController::Base.asset_host, object.url(:large)
   end
 
   # transformedSrc: The location of the transformed image as a URL. All transformation arguments are considered "best-effort". If they can be applied to an image, they will be. Otherwise any transformations which an image type does not support will be ignored.
