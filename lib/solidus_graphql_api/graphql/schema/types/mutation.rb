@@ -55,11 +55,7 @@ class Spree::GraphQL::Schema::Types::Mutation < Spree::GraphQL::Schema::Types::B
     argument :gift_card_codes, [::GraphQL::Types::String], required: true, description: %q{A list of gift card codes to append to the checkout.}
     argument :checkout_id, ::GraphQL::Types::ID, required: true, description: %q{The ID of the checkout.}
   end
-  field :checkout_line_items_add, ::Spree::GraphQL::Schema::Payloads::CheckoutLineItemsAdd, null: true do
-    description %q{Adds a list of line items to a checkout.}
-    argument :line_items, [::Spree::GraphQL::Schema::Inputs::CheckoutLineItem], required: true, description: %q{A list of line item objects to add to the checkout.}
-    argument :checkout_id, ::GraphQL::Types::ID, required: true, description: %q{The ID of the checkout.}
-  end
+  field :checkout_line_items_add, mutation: ::Spree::GraphQL::Mutations::CheckoutLineItemsAdd, deprecation_reason: %q{Use `checkoutLineItemsReplace` instead}
   field :checkout_line_items_remove, ::Spree::GraphQL::Schema::Payloads::CheckoutLineItemsRemove, null: true do
     description %q{Removes line items from an existing checkout}
     argument :checkout_id, ::GraphQL::Types::ID, required: true, description: %q{the checkout on which to remove line items}

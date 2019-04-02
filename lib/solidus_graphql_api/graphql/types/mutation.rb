@@ -86,14 +86,6 @@ module Spree::GraphQL::Types::Mutation
     raise ::Spree::GraphQL::NotImplementedError.new
   end
 
-  # checkoutLineItemsAdd: Adds a list of line items to a checkout.
-  # @param line_items [[Inputs::CheckoutLineItem!]!] A list of line item objects to add to the checkout.
-  # @param checkout_id [Types::ID!] The ID of the checkout.
-  # @return [Payloads::CheckoutLineItemsAdd]
-  def checkout_line_items_add(line_items:, checkout_id:)
-    raise ::Spree::GraphQL::NotImplementedError.new
-  end
-
   # checkoutLineItemsRemove: Removes line items from an existing checkout
   # @param checkout_id [Types::ID!] the checkout on which to remove line items
   # @param line_item_ids [[Types::ID!]!] line item ids to remove

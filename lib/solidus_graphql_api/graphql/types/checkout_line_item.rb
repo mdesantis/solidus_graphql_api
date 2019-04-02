@@ -16,18 +16,18 @@ module Spree::GraphQL::Types::CheckoutLineItem
   # quantity: The quantity of the line item.
   # @return [Types::Int!]
   def quantity()
-    raise ::Spree::GraphQL::NotImplementedError.new
+    object.quantity
   end
 
   # title: Title of the line item. Defaults to the product's title.
   # @return [Types::String!]
   def title()
-    raise ::Spree::GraphQL::NotImplementedError.new
+    object.name
   end
 
   # variant: Product variant of the line item.
   # @return [Types::ProductVariant]
   def variant()
-    raise ::Spree::GraphQL::NotImplementedError.new
+    object.variant
   end
 end
