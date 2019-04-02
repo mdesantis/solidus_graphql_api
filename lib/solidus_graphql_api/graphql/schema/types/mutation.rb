@@ -56,11 +56,12 @@ class Spree::GraphQL::Schema::Types::Mutation < Spree::GraphQL::Schema::Types::B
     argument :checkout_id, ::GraphQL::Types::ID, required: true, description: %q{The ID of the checkout.}
   end
   field :checkout_line_items_add, mutation: ::Spree::GraphQL::Mutations::CheckoutLineItemsAdd, deprecation_reason: %q{Use `checkoutLineItemsReplace` instead}
-  field :checkout_line_items_remove, ::Spree::GraphQL::Schema::Payloads::CheckoutLineItemsRemove, null: true do
-    description %q{Removes line items from an existing checkout}
-    argument :checkout_id, ::GraphQL::Types::ID, required: true, description: %q{the checkout on which to remove line items}
-    argument :line_item_ids, [::GraphQL::Types::ID], required: true, description: %q{line item ids to remove}
-  end
+  field :checkout_line_items_remove, mutation: ::Spree::GraphQL::Mutations::CheckoutLineItemsRemove, deprecation_reason: %q{Use `checkoutLineItemsReplace` instead}
+  # field :checkout_line_items_remove, ::Spree::GraphQL::Schema::Payloads::CheckoutLineItemsRemove, null: true do
+  #   description %q{Removes line items from an existing checkout}
+  #   argument :checkout_id, ::GraphQL::Types::ID, required: true, description: %q{the checkout on which to remove line items}
+  #   argument :line_item_ids, [::GraphQL::Types::ID], required: true, description: %q{line item ids to remove}
+  # end
   field :checkout_line_items_update, mutation: ::Spree::GraphQL::Mutations::CheckoutLineItemsUpdate
   field :checkout_shipping_address_update, ::Spree::GraphQL::Schema::Payloads::CheckoutShippingAddressUpdate, null: true do
     description %q{Updates the shipping address of an existing checkout.}
