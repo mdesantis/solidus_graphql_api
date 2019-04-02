@@ -112,10 +112,11 @@ If a token has already expired, a new one should be created instead via `custome
     argument :id, ::GraphQL::Types::ID, required: true, description: %q{Specifies the customer address to update.}
     argument :address, ::Spree::GraphQL::Schema::Inputs::MailingAddress, required: true, description: %q{The customer’s mailing address.}
   end
-  field :customer_create, ::Spree::GraphQL::Schema::Payloads::CustomerCreate, null: true do
-    description %q{Creates a new customer.}
-    argument :input, ::Spree::GraphQL::Schema::Inputs::CustomerCreate, required: true, description: nil
-  end
+  # field :customer_create, ::Spree::GraphQL::Schema::Payloads::CustomerCreate, null: true do
+  #   description %q{Creates a new customer.}
+  #   argument :input, ::Spree::GraphQL::Schema::Inputs::CustomerCreate, required: true, description: nil
+  # end
+  field :customer_create, mutation: ::Spree::GraphQL::Mutations::CustomerCreate
   field :customer_default_address_update, ::Spree::GraphQL::Schema::Payloads::CustomerDefaultAddressUpdate, null: true do
     description %q{Updates the default address of an existing customer.}
     argument :customer_access_token, ::GraphQL::Types::String, required: true, description: %q{The access token used to identify the customer.}

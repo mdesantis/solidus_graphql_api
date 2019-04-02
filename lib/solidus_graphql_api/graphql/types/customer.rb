@@ -46,9 +46,9 @@ module Spree::GraphQL::Types::Customer
 
   # id: A unique identifier for the customer.
   # @return [Types::ID!]
-  def id()
-    raise ::Spree::GraphQL::NotImplementedError.new
-  end
+  # def id()
+  #   raise ::Spree::GraphQL::NotImplementedError.new
+  # end
 
   # lastIncompleteCheckout: The customer's most recently updated, incomplete checkout.
   # @return [Types::Checkout]
