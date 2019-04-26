@@ -62,6 +62,13 @@ class Spree::GraphQL::Schema::Types::Product < Spree::GraphQL::Schema::Types::Ba
     object.images.ransack(query).result
   end
 
+  field :master_variant, ::Spree::GraphQL::Schema::Types::Variant, null: false do
+    description 'The product’s master variant.'
+  end
+  def master_variant
+    object.master
+  end
+
   field :name, ::GraphQL::Types::String, null: false do
     description 'The product’s name.'
   end
@@ -70,7 +77,7 @@ class Spree::GraphQL::Schema::Types::Product < Spree::GraphQL::Schema::Types::Ba
   end
 
   field :price, ::Spree::GraphQL::Schema::Types::Money, null: false do
-    description 'The date and time when the product was last modified.'
+    description 'The product’s price.'
   end
   def price
     object.price_for(context[:helpers].current_pricing_options)
@@ -90,24 +97,21 @@ class Spree::GraphQL::Schema::Types::Product < Spree::GraphQL::Schema::Types::Ba
     object.updated_at
   end
 
-  field :variants, ::Spree::GraphQL::Schema::Types::ProductVariant.connection_type, null: false do
-    description 'List of the product’s variants.'
-    argument :reverse,
+  field :variants, ::Spree::GraphQL::Schema::Types::Variant.connection_type, null: false do
+    description 'The product’s variants.'
+    argument :including_master,
              ::GraphQL::Types::Boolean,
              required: false,
              default_value: false,
-             description: 'Reverse the order of the underlying list.'
-    argument :sort_key,
-             ::Spree::GraphQL::Schema::Types::ProductVariantSortKeys,
+             description: 'Whether the returned variants should include the master variant or not.'
+    argument :query,
+             [Spree::GraphQL::Schema::Inputs::RansackQuery],
              required: false,
-             default_value: 'POSITION',
-             description: 'Sort the underlying list by the given key.'
+             default_value: [{ 'key' => 's', 'value' => 'position asc' }],
+             description: 'List of Ransack queries, can be used to filter and sort the results.'
   end
-  def variants(reverse:, sort_key:)
-    ::Spree::GraphQL::Schema::Types::ProductVariantSortKeys.apply!(
-      object.variants,
-      reverse: reverse,
-      sort_key: sort_key
-    )
+  def variants(including_master:, query:)
+    query = Spree::GraphQL::Schema::Inputs::RansackQuery.queries_to_ransack_query(query)
+    object.send(including_master ? :variants_including_master : :variants).ransack(query).result
   end
 end
